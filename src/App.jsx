@@ -7,13 +7,15 @@ import Clarity from '@microsoft/clarity';
 function App() {
   const [count, setCount] = useState(0)
 
-  const projectId = import.meta.env.VITE_CLARITY_PROJECT_ID;
-  if (projectId) {
-      Clarity.init(projectId);
-      console.log(`Clarity initialized with project ID: ${projectId}`);
-  } else {
-      console.warn('Clarity project ID is not set. Please check your environment variables.');
-  }
+  useState(() => {
+    const projectId = import.meta.env.VITE_CLARITY_PROJECT_ID;
+    if (projectId) {
+        Clarity.init(projectId);
+        console.log(`Clarity initialized with project ID: ${projectId}`);
+    } else {
+        console.warn('Clarity project ID is not set. Please check your environment variables.');
+    }
+  }, []);
 
   return (
     <>
