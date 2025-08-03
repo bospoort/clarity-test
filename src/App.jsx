@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
@@ -8,13 +8,15 @@ import Clarity from '@microsoft/clarity';
 function App() {
   const [count, setCount] = useState(0)
 
-  const projectId = import.meta.env.VITE_CLARITY_PROJECT_ID;
-  if (projectId) {
-      Clarity.init(projectId);
-      console.log(`Clarity initialized with project ID: ${projectId}`);
-  } else {
-      console.warn('Clarity project ID is not set. Please check your environment variables.');
-  }
+  useEffect(() => {
+    const projectId = import.meta.env.VITE_CLARITY_PROJECT_ID;
+    if (projectId) {
+        Clarity.init(projectId);
+        console.log(`Clarity initialized with project ID: ${projectId}`);
+    } else {
+        console.warn('Clarity project ID is not set. Please check your environment variables.');
+    }
+  }, []);
 
   return (
     <>
